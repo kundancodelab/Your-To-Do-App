@@ -1,78 +1,51 @@
-🚀 YourQuickToDo - Simple & Powerful Task Manager
+# 🚀 YourQuickToDo
 
-A minimalist, lightning-fast todo app built with UIKit that just works. Perfect for daily task tracking without the bloat.
+A simple & powerful task manager built with UIKit
 
-✨ Features
+Minimalist. Lightning-fast. Perfect for daily task tracking — without the bloat.
+
+# ✨ Features
+
 ✅ Add, complete, and manage tasks instantly
 
 🎯 Clean, focused UI with smooth animations
 
-💾 CoreData (default) + Realm (optional) - Choose your persistence layer
+💾 CoreData (default) + Realm (optional) persistence
 
-📱 Native iOS experience with programmatic UIKit
+📱 100% programmatic UIKit – true native iOS experience
 
-🏗 MVVM Architecture with dependency injection
+🏗 MVVM Architecture + dependency injection
 
 ⚡️ Lightweight and performant
 
-📸 UI Preview
-<img width="1206" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-15 at 02 01 34" src="https://github.com/user-attachments/assets/ff127b82-743e-4760-b14d-1511e0ddfc5f" />
-🛠 Tech Stack
-Swift 5 + UIKit (100% programmatic)
+📸 Preview
+<p align="center"> <img width="280" alt="App Screenshot" src="https://github.com/user-attachments/assets/ff127b82-743e-4760-b14d-1511e0ddfc5f" /> </p>
 
-CoreData (default) / Realm (optional)
+# Tech Stack
 
-MVVM with protocol-oriented design
+ Swift 5 + UIKit (programmatic)
 
-Dependency Injection for testability
+💾 CoreData / Realm
 
-🚧 Project Status
-Early Development - Core features are implemented, but many enhancements are planned!
-We welcome contributors to help shape this into a production-ready app.
+🏗 MVVM + protocol-oriented design
 
-🎯 Why Contribute?
-Perfect for Swift/UIKit learners
+🔌 Dependency injection for testability
 
-Clean, documented codebase
+#  Project Status
 
-Real-world architecture patterns
+ Early Development
 
-Great for your portfolio
+Core features implemented
 
-Beginner-friendly issues available
+Enhancements in progress
+
+
 
 📦 Installation
-Clone the repo:
-
-bash
+# Clone the repo
 git clone https://github.com/kundancodelab/YourQuickToDo.git
-Open YourQuickToDo.xcodeproj
 
-Build and run!
+# Open project
+open YourQuickToDo.xcodeproj
 
-🤝 How to Contribute
-We welcome contributions! Here's how to get started:
-
-Fork the repository
-
-Check Issues for beginner-friendly tasks
-
-Implement your changes
-
-Submit a Pull Request
-
-Areas needing help:
-
-UI/UX enhancements
-
-Additional persistence options
-
-Unit tests
-
-Documentation
-
-Feature suggestions
-
-📝 License
-MIT License - feel free to use and modify!
-
+# Build & Run 🚀

@@ -19,7 +19,9 @@ Minimalist. Lightning-fast. Perfect for daily task tracking — without the bloa
 ⚡️ Lightweight and performant
 
 📸 Preview
-<p align="center"> <img width="280" alt="App Screenshot" src="https://github.com/user-attachments/assets/ff127b82-743e-4760-b14d-1511e0ddfc5f" /> </p>
+<p align="center">
+  <img width="299" height="630" alt="App Screenshot" src="https://github.com/user-attachments/assets/9557972a-3007-439d-ae5e-5bb59f1f5ac7" />
+</p>
 
 # Tech Stack
 

@@ -13,6 +13,9 @@ A minimalist, lightning-fast todo app built with SwiftUI that just works. Perfec
 
 🎨 Customizable task categories and priorities
 
+<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-15 at 02 01 34" src="https://github.com/user-attachments/assets/ff127b82-743e-4760-b14d-1511e0ddfc5f" />
+
+
 
 
 🛠 Tech Stack

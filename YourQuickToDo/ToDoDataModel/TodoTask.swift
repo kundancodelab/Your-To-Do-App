@@ -15,6 +15,7 @@ class TodoTask: Object {
     @Persisted var isCompleted: Bool = false
     @Persisted var createdAt: Date = Date()
     @Persisted var updatedAt: Date = Date()
+    
     @Persisted var deadline: Date?
      
     var  parentCategory = LinkingObjects(fromType: Category.self, property:"TodoTasks")

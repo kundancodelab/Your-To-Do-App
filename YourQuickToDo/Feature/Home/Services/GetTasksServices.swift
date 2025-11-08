@@ -6,72 +6,55 @@
 //
 
 import Foundation
+import RealmSwift
 
-protocol getTasksProtocol {
-    func getAllTask(completion: @escaping (Result<[Task], Error>) -> Void)
-    func getTaskByID(_ id: UUID, completion: @escaping (Result<Task?, Error>) -> Void)
+// MARK: - API Service Protocols
+protocol AddTaskProtocol {
+    func addTask(_ task: TodoTask, completion: @escaping (Result<TodoTask, Error>) -> Void)
 }
 
-class GetTasksServices: getTasksProtocol {
-    func getAllTask(completion: @escaping (Result<[Task], Error>) -> Void) {
-        // This would be your actual API/database call
-        // For now, return empty array or implement real logic later
-        completion(.success([]))
-    }
-    
-    func getTaskByID(_ id: UUID, completion: @escaping (Result<Task?, Error>) -> Void) {
-        // This would be your actual API/database call
-        completion(.success(nil))
-    }
+protocol GetTasksProtocol {
+    func getAllTask(completion: @escaping (Result<[TodoTask], Error>) -> Void)
+    func getTaskByID(_ id: ObjectId, completion: @escaping (Result<TodoTask?, Error>) -> Void)
 }
 
-class GetMockTasksServices: getTasksProtocol {
-    func getAllTask(completion: @escaping (Result<[Task], Error>) -> Void) {
-        // Return mock tasks with 2-second delay to simulate network call
+// MARK: - Mock Service Implementation
+class GetMockTasksServices: GetTasksProtocol {
+    func getAllTask(completion: @escaping (Result<[TodoTask], Error>) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            // Create mock TodoTask objects with Taskdescription
             let mockTasks = [
-                Task(
-                    title: "Buy groceries",
-                    description: "Milk, eggs, bread, fruits these are very important to brings as we workout every day we need to eat lots in order to gain muscle quickly. So that we can build muscle and become strong. And take participate in body building competition.",
-                    isCompleted: false,
-                    createdAt: Date().addingTimeInterval(-86400), // 1 day ago
-                    updatedAt: nil
-                ),
-                Task(
-                    title: "Finish project report",
-                    description: "Complete the quarterly report for management",
-                    isCompleted: true,
-                    createdAt: Date().addingTimeInterval(-172800), // 2 days ago
-                    updatedAt: Date().addingTimeInterval(-86400) // 1 day ago
-                ),
-                Task(
-                    title: "Call mom",
-                    description: nil,
-                    isCompleted: false,
-                    createdAt: Date().addingTimeInterval(-43200), // 12 hours ago
-                    updatedAt: nil
-                ),
-                Task(
-                    title: "Gym workout",
-                    description: "Chest and triceps day",
-                    isCompleted: false,
-                    createdAt: Date().addingTimeInterval(-108000), // 30 hours ago
-                    updatedAt: nil
-                ),
-                Task(
-                    title: "Read book",
-                    description: "Finish chapter 5 of 'Swift Programming'",
-                    isCompleted: true,
-                    createdAt: Date().addingTimeInterval(-259200), // 3 days ago
-                    updatedAt: Date().addingTimeInterval(-86400) // 1 day ago
-                )
+                TodoTask(value: [
+                    "title": "Buy groceries",
+                    "Taskdescription": "Milk, eggs, bread, fruits and vegetables for the week",
+                    "isCompleted": false
+                ]),
+                TodoTask(value: [
+                    "title": "Finish project report",
+                    "Taskdescription": "Complete the quarterly report for management review by Friday",
+                    "isCompleted": true
+                ]),
+                TodoTask(value: [
+                    "title": "Call mom",
+                    "Taskdescription": "Discuss weekend plans and check how she's doing",
+                    "isCompleted": false
+                ]),
+                TodoTask(value: [
+                    "title": "Gym workout",
+                    "Taskdescription": "Chest and triceps day - focus on bench press and tricep extensions",
+                    "isCompleted": false
+                ]),
+                TodoTask(value: [
+                    "title": "Read book",
+                    "Taskdescription": "Finish chapter 5 of 'SwiftUI Pro - Advanced Development Techniques'",
+                    "isCompleted": true
+                ])
             ]
             completion(.success(mockTasks))
         }
     }
     
-    func getTaskByID(_ id: UUID, completion: @escaping (Result<Task?, Error>) -> Void) {
-        // Get all tasks and find the one with matching ID
+    func getTaskByID(_ id: ObjectId, completion: @escaping (Result<TodoTask?, Error>) -> Void) {
         getAllTask { result in
             switch result {
             case .success(let tasks):
@@ -80,6 +63,31 @@ class GetMockTasksServices: getTasksProtocol {
             case .failure(let error):
                 completion(.failure(error))
             }
+        }
+    }
+}
+
+// MARK: - Real API Service Implementation
+class GetTasksServices: GetTasksProtocol {
+    func getAllTask(completion: @escaping (Result<[TodoTask], Error>) -> Void) {
+        // This would be your actual API call
+        // For now, return empty array
+        completion(.success([]))
+    }
+    
+    func getTaskByID(_ id: ObjectId, completion: @escaping (Result<TodoTask?, Error>) -> Void) {
+        // This would be your actual API call
+        completion(.success(nil))
+    }
+}
+
+// MARK: - Add Task Service Implementation
+class AddTaskService: AddTaskProtocol {
+    func addTask(_ task: TodoTask, completion: @escaping (Result<TodoTask, Error>) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            // Simulate API call to add task
+            // In real app, this would send task to your backend
+            completion(.success(task))
         }
     }
 }

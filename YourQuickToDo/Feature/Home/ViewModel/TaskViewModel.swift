@@ -27,7 +27,7 @@ class TaskViewModel {
     }
     
     var errorMessage: String = ""
-    
+    private var notificationToken: NotificationToken?
     // MARK: - Callbacks
     var onTasksUpdated: (() -> Void)?
     var onLoadingStateChanged: ((Bool) -> Void)?
@@ -45,11 +45,14 @@ class TaskViewModel {
         self.taskRepository = taskRepository
         self.apiService = apiService
         isUsingMockData  = true
+        setupRealmObserver()
         print("✅ TaskViewModel initialized")
     }
     
+    deinit {
+           notificationToken?.invalidate()
+       }
     // MARK: - Public Methods
-    
     func getAllTasks() {
         isLoading = true
         
@@ -58,6 +61,14 @@ class TaskViewModel {
         syncWithRemote()
         
     }
+    private func setupRealmObserver() {
+           allTasks = taskRepository.getAllTasks()
+           
+           notificationToken = allTasks?.observe { [weak self] changes in
+               print("👀 ViewModel: Realm collection changed")
+               self?.onTasksUpdated?()
+           }
+       }
     
     func addTask(title: String) {
         print("➕ ViewModel: Adding task - \(title)")
@@ -85,6 +96,19 @@ class TaskViewModel {
             loadLocalTasks()
         } else {
             handleError(NSError(domain: "Database Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to delete task"]))
+        }
+    }
+    
+    // MARK: - Update Task Method
+    func updateTask(_ task: TodoTask, updates: [String: Any]) -> Bool {
+        print("✏️ ViewModel: Updating task - \(task.title)")
+        
+        if taskRepository.updateTask(task, updates: updates) {
+            // No need to manually reload - Realm observer will handle it
+            return true
+        } else {
+            handleError(NSError(domain: "Database Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to update task"]))
+            return false
         }
     }
     

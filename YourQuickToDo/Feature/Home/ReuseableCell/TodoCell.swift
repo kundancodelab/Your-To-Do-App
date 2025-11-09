@@ -31,6 +31,15 @@ class TodoCell: UITableViewCell {
     /// Delete button to delete the task
     @IBOutlet weak var deleteButton: UIButton!
     
+    /// Callback closure for edit button
+    var editButtonTapped: (() -> Void)?
+    
+    /// Callback Closure for mark complete button
+    var markCompleteButtonTapped:(() -> Void)?
+    
+    /// Callback closure for deletting the task
+    var deleteButtonTapped:(() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -47,6 +56,26 @@ class TodoCell: UITableViewCell {
         dateLbl.text =  DateFormatterHelper().formatDate(todo.createdAt)
     }
     
+    
+  // MARK:  IBAction Edit Button
+    
+    @IBAction func didTapEditButton(_ sender: Any) {
+      
+        editButtonTapped?()
+    }
+    
+    // MARK: IBAction Delete Button
+    
+    @IBAction func didTapDeleteButton(_ sender: Any) {
+   
+        deleteButtonTapped?()
+    }
+    
+    // MARK: IBAction Complete Task Button
+    @IBAction func didTapCompleteTaskButton(_ sender: Any) {
+        
+        markCompleteButtonTapped?()
+    }
 }
 
 

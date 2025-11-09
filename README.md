@@ -19,9 +19,17 @@ Minimalist. Lightning-fast. Perfect for daily task tracking — without the bloa
 ⚡️ Lightweight and performant
 
 📸 Preview
-<p align="center">
-  <img width="299" height="630" alt="App Screenshot" src="https://github.com/user-attachments/assets/9557972a-3007-439d-ae5e-5bb59f1f5ac7" />
+<p style="display: flex; justify-content: space-between; align-items: center;">
+  <img width="1179" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-11-09 at 23:08:52" 
+       src="https://github.com/user-attachments/assets/a4b5d295-1f3a-4f5c-b12d-dc649b242c80" />
+
+  <img width="1179" height="2556" alt="Simulator Screenshot - iPhone 16 - 2025-11-09 at 23:08:56" 
+       src="https://github.com/user-attachments/assets/0a551728-ca6e-4249-a294-9f86eada5dbc" />
 </p>
+
+
+
+
 
 # Tech Stack
 

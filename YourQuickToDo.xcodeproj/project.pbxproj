@@ -14,6 +14,7 @@
 		CE189F032EBF83AA0008931E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F022EBF83AA0008931E /* DatabaseManager.swift */; };
 		CE189F062EBF96680008931E /* AppUtilityBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F052EBF96680008931E /* AppUtilityBaseClass.swift */; };
 		CE189F092EBFA6370008931E /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F082EBFA6370008931E /* TaskRepository.swift */; };
+		CE9AC31D2EC0FF84005191F2 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC31C2EC0FF84005191F2 /* UIView+Extension.swift */; };
 		CED6134B2E774CE500768A02 /* GetTasksServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6134A2E774CE500768A02 /* GetTasksServices.swift */; };
 		CED6134D2E774DCF00768A02 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6134C2E774DCF00768A02 /* Task.swift */; };
 		CED6134F2E77504A00768A02 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6134E2E77504A00768A02 /* TaskViewModel.swift */; };
@@ -50,6 +51,7 @@
 		CE189F022EBF83AA0008931E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		CE189F052EBF96680008931E /* AppUtilityBaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtilityBaseClass.swift; sourceTree = "<group>"; };
 		CE189F082EBFA6370008931E /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		CE9AC31C2EC0FF84005191F2 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CEBD27CE2E7600AF00D4F8DD /* YourQuickToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourQuickToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED6134A2E774CE500768A02 /* GetTasksServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTasksServices.swift; sourceTree = "<group>"; };
 		CED6134C2E774DCF00768A02 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		CE9AC31B2EC0FF77005191F2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE9AC31C2EC0FF84005191F2 /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		CEBD27C52E7600AF00D4F8DD = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +151,7 @@
 		CEF5C8B92E7726FF007409A2 /* YourQuickToDo */ = {
 			isa = PBXGroup;
 			children = (
+				CE9AC31B2EC0FF77005191F2 /* Extension */,
 				CE189F042EBF958C0008931E /* Utilities */,
 				CE189F012EBF839D0008931E /* DatabaseManager */,
 				CE189EF72EBF826B0008931E /* ToDoDataModel */,
@@ -333,6 +344,7 @@
 			files = (
 				CE189F062EBF96680008931E /* AppUtilityBaseClass.swift in Sources */,
 				CEF5C8BB2E7726FF007409A2 /* AppDelegate.swift in Sources */,
+				CE9AC31D2EC0FF84005191F2 /* UIView+Extension.swift in Sources */,
 				CEF5C8BC2E7726FF007409A2 /* SceneDelegate.swift in Sources */,
 				CE189F032EBF83AA0008931E /* DatabaseManager.swift in Sources */,
 				CEF5C8BD2E7726FF007409A2 /* HomeVC.swift in Sources */,

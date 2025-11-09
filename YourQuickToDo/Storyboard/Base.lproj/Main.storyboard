@@ -52,7 +52,7 @@
                                             <color key="baseForegroundColor" white="1" alpha="0.89833120749999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="didTapAddNewTaskBtn" destination="BYZ-38-t0r" eventType="touchUpInside" id="qZR-R2-mS5"/>
+                                            <action selector="didTapAddNewTaskBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2f8-QW-QDW"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -92,6 +92,7 @@
                     <connections>
                         <outlet property="addTaskButton" destination="8Mb-jF-qV7" id="HxG-Mf-3G8"/>
                         <outlet property="tableView" destination="clw-G2-cmh" id="Pmf-gF-gTw"/>
+                        <outlet property="taskCountLabel" destination="TtW-2d-8uz" id="nBc-8a-b7Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

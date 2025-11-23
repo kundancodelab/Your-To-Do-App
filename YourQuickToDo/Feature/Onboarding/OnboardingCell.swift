@@ -75,8 +75,12 @@ class OnboardingCell: UICollectionViewCell {
     }
     
     func configure(with slide: OnboardingSlide) {
-        slideImageView.image = slide.image
+        let tintedImage = slide.image?.withRenderingMode(.alwaysTemplate)
+        slideImageView.image = tintedImage
+        slideImageView.tintColor = AppTheme.Colors.primary
+        
         titleLabel.text = slide.title
         descriptionLabel.text = slide.description
     }
+
 }

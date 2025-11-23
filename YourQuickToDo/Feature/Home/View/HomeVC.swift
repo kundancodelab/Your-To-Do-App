@@ -81,10 +81,30 @@ class HomeVC: AppUtilityBaseClass {
     private func setUpDataBinding() {
         taskViewModel.onTasksUpdated = { [weak self] in
             print(" HomeVC: onTasksUpdated callback triggered - Reloading table view")
-            let count = self?.taskViewModel.allTasks?.count ?? 0
-            self?.emptyStateLabel.isHidden = count != 0
-            self?.tableView.isHidden = count == 0
             self?.tableView.reloadData()
+            
+            // Update task count label with meaningful messages
+            guard let tasks = self?.taskViewModel.allTasks else { return }
+            
+            let totalTasks = tasks.count
+            let completedTasks = tasks.filter { $0.isCompleted }.count
+            let remainingTasks = totalTasks - completedTasks
+            
+            self?.emptyStateLabel.isHidden = totalTasks != 0
+            self?.tableView.isHidden = totalTasks == 0
+            
+            if totalTasks == 0 {
+                self?.taskCountLabel.text = "No tasks for today"
+            } else if completedTasks == 0 {
+                // No tasks completed yet
+                self?.taskCountLabel.text = "You have \(totalTasks) \n \(totalTasks == 1 ? "task" : "tasks")"
+            } else if remainingTasks == 0 {
+                // All tasks completed
+                self?.taskCountLabel.text = "You have completed \n all tasks! Congrats 🎉"
+            } else {
+                // Some tasks completed
+                self?.taskCountLabel.text = "You have completed \(completedTasks) \n \(completedTasks == 1 ? "task" : "tasks"), \(remainingTasks) left"
+            }
         }
         
         taskViewModel.onLoadingStateChanged = { [weak self] isLoading in

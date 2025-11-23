@@ -22,18 +22,37 @@ class HomeVC: AppUtilityBaseClass {
     }
     /// Task count label
     @IBOutlet weak var taskCountLabel: UILabel!
+    /// Empty State
+    private lazy var emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No tasks yet"
+        label.textAlignment = .center
+        label.textColor = .systemGray
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    // MARK: - Router
+    var router: HomeRouter?
+    
     // MARK: - ViewModel
     private let taskViewModel = TaskViewModel()
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = AppTheme.Colors.background
+        taskCountLabel.textColor = AppTheme.Colors.textSecondary
+        taskCountLabel.font = AppTheme.Fonts.headline()
+        setupUI()
         setupTableView()
-        setupBindings()
+        setUpDataBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        taskViewModel.getAllTasks()
+        taskCountLabel.textColor = AppTheme.Colors.textSecondary // Ensure color is set
+        taskViewModel.loadTodaysTasks() // Load only today's tasks for HomeVC
     }
     
     // MARK: - IBActions
@@ -52,11 +71,40 @@ class HomeVC: AppUtilityBaseClass {
         tableView.showsHorizontalScrollIndicator = false
         tableView.register(UINib(nibName: "TodoCell", bundle: nil), forCellReuseIdentifier: "TodoCell")
     }
-    
-    private func setupBindings() {
+    private func setupUI(){
+        view.addSubview(emptyStateLabel)
+        NSLayoutConstraint.activate([
+            emptyStateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyStateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    private func setUpDataBinding() {
         taskViewModel.onTasksUpdated = { [weak self] in
-            print("🔄 HomeVC: onTasksUpdated callback triggered - Reloading table view")
+            print(" HomeVC: onTasksUpdated callback triggered - Reloading table view")
             self?.tableView.reloadData()
+            
+            // Update task count label with meaningful messages
+            guard let tasks = self?.taskViewModel.allTasks else { return }
+            
+            let totalTasks = tasks.count
+            let completedTasks = tasks.filter { $0.isCompleted }.count
+            let remainingTasks = totalTasks - completedTasks
+            
+            self?.emptyStateLabel.isHidden = totalTasks != 0
+            self?.tableView.isHidden = totalTasks == 0
+            
+            if totalTasks == 0 {
+                self?.taskCountLabel.text = "No tasks for today"
+            } else if completedTasks == 0 {
+                // No tasks completed yet
+                self?.taskCountLabel.text = "You have \(totalTasks) \n \(totalTasks == 1 ? "task" : "tasks")"
+            } else if remainingTasks == 0 {
+                // All tasks completed
+                self?.taskCountLabel.text = "You have completed \n all tasks! Congrats 🎉"
+            } else {
+                // Some tasks completed
+                self?.taskCountLabel.text = "You have completed \(completedTasks) \n \(completedTasks == 1 ? "task" : "tasks"), \(remainingTasks) left"
+            }
         }
         
         taskViewModel.onLoadingStateChanged = { [weak self] isLoading in
@@ -85,18 +133,28 @@ class HomeVC: AppUtilityBaseClass {
     }
     
     private func navigateToNewTaskController(taskId:String = ""){
-        let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddNewTaskVC") as! AddNewTaskVC
-        addTaskViewController.modalPresentationStyle = .automatic
-        addTaskViewController.taskViewModel = taskViewModel
-        present(addTaskViewController, animated: true)
+        // Use router if available, otherwise fallback to direct presentation
+        if let router = router {
+            router.present(.addTask, modalPresentationStyle: .automatic)
+        } else {
+            let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddNewTaskVC") as! AddNewTaskVC
+            addTaskViewController.modalPresentationStyle = .automatic
+            addTaskViewController.taskViewModel = taskViewModel
+            present(addTaskViewController, animated: true)
+        }
     }
     
     private func navigateToEditTaskController(task: TodoTask) {
-        let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddNewTaskVC") as! AddNewTaskVC
-        addTaskViewController.modalPresentationStyle = .automatic
-        addTaskViewController.taskViewModel = taskViewModel
-        addTaskViewController.editingTask = task // Pass the task to edit
-        present(addTaskViewController, animated: true)
+        // Use router if available, otherwise fallback to direct presentation
+        if let router = router {
+            router.present(.editTask(task), modalPresentationStyle: .automatic)
+        } else {
+            let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddNewTaskVC") as! AddNewTaskVC
+            addTaskViewController.modalPresentationStyle = .automatic
+            addTaskViewController.taskViewModel = taskViewModel
+            addTaskViewController.editingTask = task
+            present(addTaskViewController, animated: true)
+        }
     }
 }
 
@@ -136,10 +194,30 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         
         /// Mark complete task - FIXED: No navigation needed
         cell.markCompleteButtonTapped = { [weak self] in
+            guard let self = self else { return }
             print("Mark complete button tapped for task: \(task.title)")
             cell.animateWithFadeAndAction {
-                self?.taskViewModel.toggleTaskCompletion(task)
-                // Realm observer will automatically update the UI
+                let wasCompleted = task.isCompleted
+                self.taskViewModel.toggleTaskCompletion(task)
+                
+                // Show toast with appropriate message
+                if wasCompleted {
+                    // Task was marked as incomplete
+                    self.showToast(
+                        message: "🔄 Task marked as incomplete!",
+                        duration: 1.5,
+                        color: AppTheme.Colors.textSecondary.withAlphaComponent(0.9),
+                        isTop: false
+                    )
+                } else {
+                    // Task was marked as complete
+                    self.showToast(
+                        message: "🎉 Great job! Task completed!",
+                        duration: 1.5,
+                        color: AppTheme.Colors.primary.withAlphaComponent(0.9),
+                        isTop: false
+                    )
+                }
             }
         }
         
@@ -165,7 +243,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             self?.taskViewModel.toggleTaskCompletion(task)
             completion(true)
         }
-        completeAction.backgroundColor = task.isCompleted ? .orange : .systemGreen
+        completeAction.backgroundColor = AppTheme.Colors.secondary
         
         return UISwipeActionsConfiguration(actions: [deleteAction, completeAction])
     }

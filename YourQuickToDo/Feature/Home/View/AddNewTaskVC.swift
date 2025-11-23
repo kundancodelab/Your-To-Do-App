@@ -4,8 +4,16 @@
 //
 //  Created by User on 15/09/25.
 //
+//
 
 import UIKit
+import ObjectiveC
+
+// Associated object keys
+private struct AssociatedKeys {
+    static var datePicker = "datePicker"
+}
+
 
 class AddNewTaskVC: AppUtilityBaseClass {
     
@@ -53,16 +61,29 @@ class AddNewTaskVC: AppUtilityBaseClass {
         }
     }
     
+    // Calendar button for date selection
+    private let calendarButton: UIButton = {
+        let button = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+        button.setImage(UIImage(systemName: "calendar", withConfiguration: config), for: .normal)
+        button.tintColor = AppTheme.Colors.primary
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: - Dependencies
     var taskViewModel: TaskViewModel!
     
     var editingTask: TodoTask?
     
+    // Store selected deadline
+    private var selectedDeadline: Date?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextFields()
-        setupDatePicker()
+        setupCalendarButton()
         setupForEditMode()
     }
     
@@ -86,6 +107,7 @@ class AddNewTaskVC: AppUtilityBaseClass {
                 
                 // Format and set deadline if exists
                 if let deadline = task.deadline {
+                    selectedDeadline = deadline
                     let formatter = DateFormatter()
                     formatter.dateStyle = .medium
                     formatter.timeStyle = .short
@@ -99,41 +121,95 @@ class AddNewTaskVC: AppUtilityBaseClass {
             }
         }
     
-    private func setupDatePicker() {
+    private func setupCalendarButton() {
+        // Add calendar button to deadline text field
+        tfTaskDeadline.addSubview(calendarButton)
+        
+        NSLayoutConstraint.activate([
+            calendarButton.trailingAnchor.constraint(equalTo: tfTaskDeadline.trailingAnchor, constant: -10),
+            calendarButton.centerYAnchor.constraint(equalTo: tfTaskDeadline.centerYAnchor),
+            calendarButton.widthAnchor.constraint(equalToConstant: 30),
+            calendarButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func calendarButtonTapped() {
+        presentDatePickerBottomSheet()
+    }
+    
+    private func presentDatePickerBottomSheet() {
+        let bottomSheetVC = UIViewController()
+        bottomSheetVC.modalPresentationStyle = .pageSheet
+        
+        if let sheet = bottomSheetVC.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
+        
+        bottomSheetVC.view.backgroundColor = .systemBackground
+        
+        // Date picker
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .dateAndTime
+        datePicker.preferredDatePickerStyle = .wheels
         datePicker.minimumDate = Date()
-        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-        tfTaskDeadline.inputView = datePicker
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
         
-        // Add toolbar with Done button specifically for date picker
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(datePickerDoneTapped))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(datePickerCancelTapped))
-        toolbar.items = [cancelButton, flexibleSpace, doneButton]
-        tfTaskDeadline.inputAccessoryView = toolbar
-    }
-    
-    @objc private func dateChanged(_ sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        tfTaskDeadline.text = formatter.string(from: sender.date)
-    }
-    
-    @objc private func datePickerDoneTapped() {
-        // If no date selected yet, set to current date
-        if tfTaskDeadline.text?.isEmpty ?? true {
-            dateChanged(UIDatePicker())
+        if let deadline = selectedDeadline {
+            datePicker.date = deadline
         }
-        tfTaskDeadline.resignFirstResponder()
+        
+        bottomSheetVC.view.addSubview(datePicker)
+        
+        // Done button
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        doneButton.backgroundColor = AppTheme.Colors.primary
+        doneButton.tintColor = .white
+        doneButton.layer.cornerRadius = 12
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.addTarget(self, action: #selector(confirmDateSelection(_:)), for: .touchUpInside)
+        
+        bottomSheetVC.view.addSubview(doneButton)
+        
+        NSLayoutConstraint.activate([
+            datePicker.centerXAnchor.constraint(equalTo: bottomSheetVC.view.centerXAnchor),
+            datePicker.centerYAnchor.constraint(equalTo: bottomSheetVC.view.centerYAnchor, constant: -40),
+            datePicker.leadingAnchor.constraint(equalTo: bottomSheetVC.view.leadingAnchor, constant: 20),
+            datePicker.trailingAnchor.constraint(equalTo: bottomSheetVC.view.trailingAnchor, constant: -20),
+            
+            doneButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 30),
+            doneButton.leadingAnchor.constraint(equalTo: bottomSheetVC.view.leadingAnchor, constant: 20),
+            doneButton.trailingAnchor.constraint(equalTo: bottomSheetVC.view.trailingAnchor, constant: -20),
+            doneButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        objc_setAssociatedObject(bottomSheetVC, &AssociatedKeys.datePicker, datePicker, .OBJC_ASSOCIATION_RETAIN)
+        
+        present(bottomSheetVC, animated: true)
     }
     
-    @objc private func datePickerCancelTapped() {
-        tfTaskDeadline.text = "" // Clear if cancelled
-        tfTaskDeadline.resignFirstResponder()
+    @objc private func confirmDateSelection(_ sender: UIButton) {
+        // Get the date picker from the presented view controller
+        if let presentedVC = presentedViewController,
+           let datePicker = objc_getAssociatedObject(presentedVC, &AssociatedKeys.datePicker) as? UIDatePicker {
+            
+            selectedDeadline = datePicker.date
+            
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+            tfTaskDeadline.text = formatter.string(from: datePicker.date)
+            
+            dismiss(animated: true)
+        }
+    }
+    
+    @objc private func cancelDateSelection() {
+        dismiss(animated: true)
     }
     
     private func addDoneButtonToTextFields() {
@@ -158,11 +234,8 @@ class AddNewTaskVC: AppUtilityBaseClass {
                return
            }
            
-           guard let taskDescription = tfTaskDescription.text, !taskDescription.isEmpty else {
-               showRedView(view: tfTaskDescription)
-               showCustomAlert(title: "Error", message: "Please enter task description", viewController: self)
-               return
-           }
+           // Description is optional - use empty string if not provided
+           let taskDescription = tfTaskDescription.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
            
            if let editingTask = editingTask {
                // UPDATE existing task
@@ -179,26 +252,13 @@ class AddNewTaskVC: AppUtilityBaseClass {
         btnAddTask.setTitle("Adding...", for: .normal)
         
         // Create task with optional deadline
-        let todoTask = TodoTask(title: title, description: description)
-        
-        // Add deadline if provided
-        if let deadlineText = tfTaskDeadline.text, !deadlineText.isEmpty {
-            // Parse the deadline date from text
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .short
-            if let deadlineDate = formatter.date(from: deadlineText) {
-                // You'll need to add deadline property to your TodoTask model
-                // todoTask.deadline = deadlineDate
-                print("📅 Task deadline: \(deadlineDate)")
-            }
-        }
+        let todoTask = TodoTask(title: title, description: description, deadline: selectedDeadline)
         
         // Use the ViewModel to add task
         taskViewModel.addTask(todoTask)
         
         // Show success message
-        showToast(message: "Task added successfully!", duration: 2.0, color: UIColor.systemGreen.withAlphaComponent(0.8), isTop: false)
+        showToast(message: "Task added successfully!", duration: 2.0, color: AppTheme.Colors.secondary.withAlphaComponent(0.8), isTop: false)
         
         // Dismiss after delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -219,28 +279,21 @@ extension AddNewTaskVC  {
             btnAddTask.setTitle("Updating...", for: .normal)
             
             // Update task properties
-            let updates: [String: Any] = [
+            var updates: [String: Any] = [
                 "title": newTitle,
                 "Taskdescription": newDescription,
                 "updatedAt": Date()
             ]
             
             // Update deadline if provided
-            if let deadlineText = tfTaskDeadline.text, !deadlineText.isEmpty {
-                let formatter = DateFormatter()
-                formatter.dateStyle = .medium
-                formatter.timeStyle = .short
-                if let deadlineDate = formatter.date(from: deadlineText) {
-                    // You'll need to add deadline update logic to your repository
-                    // For now, we'll include it in updates
-                    print("📅 Updated task deadline: \(deadlineDate)")
-                }
+            if let deadline = selectedDeadline {
+                updates["deadline"] = deadline
             }
             
             // Use ViewModel to update task
             // You'll need to add this method to your TaskViewModel
             if taskViewModel.updateTask(task, updates: updates) {
-                showToast(message: "Task updated successfully!", duration: 2.0, color: UIColor.systemBlue.withAlphaComponent(0.8), isTop: false)
+                showToast(message: "Task updated successfully!", duration: 2.0, color: AppTheme.Colors.primary.withAlphaComponent(0.8), isTop: false)
             } else {
                 showToast(message: "Failed to update task", duration: 2.0, color: UIColor.systemRed.withAlphaComponent(0.8), isTop: false)
             }
@@ -253,14 +306,18 @@ extension AddNewTaskVC  {
 }
 // MARK: - UITextField Delegate
 extension AddNewTaskVC: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        // Prevent keyboard from appearing for deadline field
+        // User should tap the calendar button instead
+        if textField == tfTaskDeadline {
+            return false
+        }
+        return true
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // Clear red border when user starts editing
         showClearView(view: textField)
-        
-        // Auto-set current date when deadline field is tapped
-        if textField == tfTaskDeadline && textField.text?.isEmpty ?? true {
-            dateChanged(UIDatePicker())
-        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -12,11 +12,47 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+  
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions) {
+
+        print("🚀 SceneDelegate: scene willConnectTo session")
+
+        guard let windowScene = (scene as? UIWindowScene) else { 
+            print("❌ SceneDelegate: Failed to cast scene to UIWindowScene")
+            return 
+        }
+
+        // Create window
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        print("✅ SceneDelegate: Window created")
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let isOnboardingCompleted = UserDefaults.standard.isOnboardingCompleted
+        print("👤 SceneDelegate: isOnboardingCompleted = \(isOnboardingCompleted)")
+
+        // If onboarding completed → go to TabBar
+        if isOnboardingCompleted {
+            guard let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? MainTabBarController else {
+                fatalError("❌ MainTabBarController not found")
+            }
+            tabBarVC.selectedIndex = 0 
+            window.rootViewController = tabBarVC
+            print("✅ SceneDelegate: Set rootViewController to MainTabBarController")
+        }
+        // Onboarding NOT completed → show Onboarding
+        else {
+            guard let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnloardingVC") as? OnloardingVC else {
+                fatalError("❌ OnloardingVC not found")
+            }
+            window.rootViewController = onboardingVC
+            print("✅ SceneDelegate: Set rootViewController to OnloardingVC")
+        }
+
+        window.makeKeyAndVisible()
+        print("✅ SceneDelegate: window.makeKeyAndVisible() called. Window frame: \(window.frame)")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -52,4 +88,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

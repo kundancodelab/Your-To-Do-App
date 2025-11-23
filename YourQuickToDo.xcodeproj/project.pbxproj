@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE09B0312ED1BB8600A0E9D5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B02F2ED1BB8600A0E9D5 /* Router.swift */; };
+		CE09B0342ED1BC0800A0E9D5 /* AllTasksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0322ED1BC0800A0E9D5 /* AllTasksVC.swift */; };
+		CE09B0392ED1BC2C00A0E9D5 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0372ED1BC2C00A0E9D5 /* ProfileVC.swift */; };
+		CE09B03A2ED1BC2C00A0E9D5 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0352ED1BC2C00A0E9D5 /* ProfileRouter.swift */; };
+		CE09B03D2ED1BC4A00A0E9D5 /* PendingTasksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B03B2ED1BC4A00A0E9D5 /* PendingTasksVC.swift */; };
+		CE09B0402ED1BD6300A0E9D5 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B03E2ED1BD6300A0E9D5 /* HomeRouter.swift */; };
+		CE09B0422ED1BE5E00A0E9D5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0412ED1BE5E00A0E9D5 /* MainTabBarController.swift */; };
+		CE09B0442ED1BE8900A0E9D5 /* AppDelegate+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0432ED1BE8900A0E9D5 /* AppDelegate+Notifications.swift */; };
+		CE09B0462ED1BF2100A0E9D5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0452ED1BF2100A0E9D5 /* NotificationManager.swift */; };
+		CE09B0492ED1CC5200A0E9D5 /* BuyMyCoffeeWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0482ED1CC5200A0E9D5 /* BuyMyCoffeeWebViewVC.swift */; };
+		CE09B0C52ED1D79C00A0E9D5 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0C42ED1D79C00A0E9D5 /* LoginVC.swift */; };
+		CE09B0C82ED2481F00A0E9D5 /* OnloardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0C72ED2481F00A0E9D5 /* OnloardingVC.swift */; };
 		CE189EF92EBF827C0008931E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189EF82EBF827C0008931E /* Category.swift */; };
 		CE189EFB2EBF82AF0008931E /* TodoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189EFA2EBF82AF0008931E /* TodoTask.swift */; };
 		CE189EFE2EBF833F0008931E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE189EFD2EBF833F0008931E /* RealmSwift */; };
@@ -14,6 +26,11 @@
 		CE189F032EBF83AA0008931E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F022EBF83AA0008931E /* DatabaseManager.swift */; };
 		CE189F062EBF96680008931E /* AppUtilityBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F052EBF96680008931E /* AppUtilityBaseClass.swift */; };
 		CE189F092EBFA6370008931E /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F082EBFA6370008931E /* TaskRepository.swift */; };
+		CE29752B2ED3A07100F9CBC1 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29752A2ED3A07100F9CBC1 /* AboutVC.swift */; };
+		CE7608F42ED25C6700F0196C /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7608F32ED25C6700F0196C /* OnboardingCell.swift */; };
+		CE7608F62ED25D3300F0196C /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7608F52ED25D3300F0196C /* AppTheme.swift */; };
+		CE7608F82ED25DB400F0196C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7608F72ED25DB400F0196C /* Utils.swift */; };
+		CE7608FA2ED25F6400F0196C /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7608F92ED25F6400F0196C /* UserDefaultsKeys.swift */; };
 		CE9AC31D2EC0FF84005191F2 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC31C2EC0FF84005191F2 /* UIView+Extension.swift */; };
 		CED6134B2E774CE500768A02 /* GetTasksServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6134A2E774CE500768A02 /* GetTasksServices.swift */; };
 		CED6134D2E774DCF00768A02 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6134C2E774DCF00768A02 /* Task.swift */; };
@@ -46,11 +63,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE09B02F2ED1BB8600A0E9D5 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		CE09B0322ED1BC0800A0E9D5 /* AllTasksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksVC.swift; sourceTree = "<group>"; };
+		CE09B0352ED1BC2C00A0E9D5 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		CE09B0372ED1BC2C00A0E9D5 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		CE09B03B2ED1BC4A00A0E9D5 /* PendingTasksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTasksVC.swift; sourceTree = "<group>"; };
+		CE09B03E2ED1BD6300A0E9D5 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		CE09B0412ED1BE5E00A0E9D5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		CE09B0432ED1BE8900A0E9D5 /* AppDelegate+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notifications.swift"; sourceTree = "<group>"; };
+		CE09B0452ED1BF2100A0E9D5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		CE09B0482ED1CC5200A0E9D5 /* BuyMyCoffeeWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyMyCoffeeWebViewVC.swift; sourceTree = "<group>"; };
+		CE09B0C42ED1D79C00A0E9D5 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		CE09B0C72ED2481F00A0E9D5 /* OnloardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnloardingVC.swift; sourceTree = "<group>"; };
 		CE189EF82EBF827C0008931E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CE189EFA2EBF82AF0008931E /* TodoTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTask.swift; sourceTree = "<group>"; };
 		CE189F022EBF83AA0008931E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		CE189F052EBF96680008931E /* AppUtilityBaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtilityBaseClass.swift; sourceTree = "<group>"; };
 		CE189F082EBFA6370008931E /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		CE29752A2ED3A07100F9CBC1 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		CE7608F32ED25C6700F0196C /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
+		CE7608F52ED25D3300F0196C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		CE7608F72ED25DB400F0196C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		CE7608F92ED25F6400F0196C /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		CE9AC31C2EC0FF84005191F2 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CEBD27CE2E7600AF00D4F8DD /* YourQuickToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourQuickToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED6134A2E774CE500768A02 /* GetTasksServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTasksServices.swift; sourceTree = "<group>"; };
@@ -82,6 +116,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE09B0302ED1BB8600A0E9D5 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				CE09B02F2ED1BB8600A0E9D5 /* Router.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		CE09B0332ED1BC0800A0E9D5 /* AllTasks */ = {
+			isa = PBXGroup;
+			children = (
+				CE09B0322ED1BC0800A0E9D5 /* AllTasksVC.swift */,
+			);
+			path = AllTasks;
+			sourceTree = "<group>";
+		};
+		CE09B0362ED1BC2C00A0E9D5 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				CE09B0352ED1BC2C00A0E9D5 /* ProfileRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		CE09B0382ED1BC2C00A0E9D5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE09B0362ED1BC2C00A0E9D5 /* Router */,
+				CE29752A2ED3A07100F9CBC1 /* AboutVC.swift */,
+				CE09B0372ED1BC2C00A0E9D5 /* ProfileVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CE09B03C2ED1BC4A00A0E9D5 /* PendingTasks */ = {
+			isa = PBXGroup;
+			children = (
+				CE09B03B2ED1BC4A00A0E9D5 /* PendingTasksVC.swift */,
+			);
+			path = PendingTasks;
+			sourceTree = "<group>";
+		};
+		CE09B03F2ED1BD6300A0E9D5 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				CE09B03E2ED1BD6300A0E9D5 /* HomeRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		CE09B0472ED1CC3400A0E9D5 /* BuyMyCoffee */ = {
+			isa = PBXGroup;
+			children = (
+				CE09B0482ED1CC5200A0E9D5 /* BuyMyCoffeeWebViewVC.swift */,
+			);
+			path = BuyMyCoffee;
+			sourceTree = "<group>";
+		};
+		CE09B0C62ED247F800A0E9D5 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				CE7608F32ED25C6700F0196C /* OnboardingCell.swift */,
+				CE09B0C72ED2481F00A0E9D5 /* OnloardingVC.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		CE189EF72EBF826B0008931E /* ToDoDataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +210,11 @@
 		CE189F042EBF958C0008931E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CE09B0452ED1BF2100A0E9D5 /* NotificationManager.swift */,
 				CE189F052EBF96680008931E /* AppUtilityBaseClass.swift */,
+				CE7608F52ED25D3300F0196C /* AppTheme.swift */,
+				CE7608F72ED25DB400F0196C /* Utils.swift */,
+				CE7608F92ED25F6400F0196C /* UserDefaultsKeys.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -127,6 +232,7 @@
 			children = (
 				CEF5C8B92E7726FF007409A2 /* YourQuickToDo */,
 				CEF5C8B12E7726FF007409A2 /* Info.plist */,
+				CEF5C8C42E772715007409A2 /* Resources */,
 				CE189EFC2EBF833F0008931E /* Frameworks */,
 				CEBD27CF2E7600AF00D4F8DD /* Products */,
 			);
@@ -151,12 +257,12 @@
 		CEF5C8B92E7726FF007409A2 /* YourQuickToDo */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5C8C32E772707007409A2 /* Root */,
+				CE189F012EBF839D0008931E /* DatabaseManager */,
 				CE9AC31B2EC0FF77005191F2 /* Extension */,
 				CE189F042EBF958C0008931E /* Utilities */,
-				CE189F012EBF839D0008931E /* DatabaseManager */,
 				CE189EF72EBF826B0008931E /* ToDoDataModel */,
-				CEF5C8C32E772707007409A2 /* Root */,
-				CEF5C8C42E772715007409A2 /* Resources */,
+				CE09B0302ED1BB8600A0E9D5 /* Router */,
 				CEF5C8C62E772746007409A2 /* Feature */,
 				CEF5C8FE2E773389007409A2 /* Storyboard */,
 				CEF5C8B82E7726FF007409A2 /* YourQuickToDo.xcdatamodeld */,
@@ -167,6 +273,8 @@
 		CEF5C8C32E772707007409A2 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				CE09B0432ED1BE8900A0E9D5 /* AppDelegate+Notifications.swift */,
+				CE09B0412ED1BE5E00A0E9D5 /* MainTabBarController.swift */,
 				CEF5C8AF2E7726FF007409A2 /* AppDelegate.swift */,
 				CEF5C8B62E7726FF007409A2 /* SceneDelegate.swift */,
 			);
@@ -184,8 +292,13 @@
 		CEF5C8C62E772746007409A2 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				CE09B0C62ED247F800A0E9D5 /* Onboarding */,
+				CE09B0472ED1CC3400A0E9D5 /* BuyMyCoffee */,
+				CE09B0332ED1BC0800A0E9D5 /* AllTasks */,
 				CEF5C8C72E77274F007409A2 /* Auth */,
 				CEF5C8C82E772755007409A2 /* Home */,
+				CE09B0382ED1BC2C00A0E9D5 /* Profile */,
+				CE09B03C2ED1BC4A00A0E9D5 /* PendingTasks */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -193,6 +306,7 @@
 		CEF5C8C72E77274F007409A2 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				CE09B0C42ED1D79C00A0E9D5 /* LoginVC.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -200,6 +314,7 @@
 		CEF5C8C82E772755007409A2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CE09B03F2ED1BD6300A0E9D5 /* Router */,
 				CED613502E7752D100768A02 /* HomeHelper */,
 				CEF5C9052E773588007409A2 /* ReuseableCell */,
 				CEF5C8CB2E77276B007409A2 /* View */,
@@ -342,22 +457,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE09B0422ED1BE5E00A0E9D5 /* MainTabBarController.swift in Sources */,
+				CE09B0462ED1BF2100A0E9D5 /* NotificationManager.swift in Sources */,
+				CE09B03D2ED1BC4A00A0E9D5 /* PendingTasksVC.swift in Sources */,
 				CE189F062EBF96680008931E /* AppUtilityBaseClass.swift in Sources */,
 				CEF5C8BB2E7726FF007409A2 /* AppDelegate.swift in Sources */,
 				CE9AC31D2EC0FF84005191F2 /* UIView+Extension.swift in Sources */,
 				CEF5C8BC2E7726FF007409A2 /* SceneDelegate.swift in Sources */,
+				CE7608F62ED25D3300F0196C /* AppTheme.swift in Sources */,
+				CE09B0C82ED2481F00A0E9D5 /* OnloardingVC.swift in Sources */,
 				CE189F032EBF83AA0008931E /* DatabaseManager.swift in Sources */,
+				CE09B0392ED1BC2C00A0E9D5 /* ProfileVC.swift in Sources */,
+				CE09B03A2ED1BC2C00A0E9D5 /* ProfileRouter.swift in Sources */,
+				CE7608F42ED25C6700F0196C /* OnboardingCell.swift in Sources */,
 				CEF5C8BD2E7726FF007409A2 /* HomeVC.swift in Sources */,
 				CED6134B2E774CE500768A02 /* GetTasksServices.swift in Sources */,
 				CE189EFB2EBF82AF0008931E /* TodoTask.swift in Sources */,
 				CED613542E775BAF00768A02 /* AddNewTaskVC.swift in Sources */,
+				CE09B0442ED1BE8900A0E9D5 /* AppDelegate+Notifications.swift in Sources */,
 				CEF5C9082E7735AC007409A2 /* TodoCell.swift in Sources */,
+				CE09B0312ED1BB8600A0E9D5 /* Router.swift in Sources */,
+				CE29752B2ED3A07100F9CBC1 /* AboutVC.swift in Sources */,
 				CE189F092EBFA6370008931E /* TaskRepository.swift in Sources */,
+				CE7608F82ED25DB400F0196C /* Utils.swift in Sources */,
 				CED6134F2E77504A00768A02 /* TaskViewModel.swift in Sources */,
 				CED6134D2E774DCF00768A02 /* Task.swift in Sources */,
+				CE7608FA2ED25F6400F0196C /* UserDefaultsKeys.swift in Sources */,
+				CE09B0492ED1CC5200A0E9D5 /* BuyMyCoffeeWebViewVC.swift in Sources */,
 				CEF5C8BE2E7726FF007409A2 /* YourQuickToDo.xcdatamodeld in Sources */,
+				CE09B0342ED1BC0800A0E9D5 /* AllTasksVC.swift in Sources */,
+				CE09B0C52ED1D79C00A0E9D5 /* LoginVC.swift in Sources */,
 				CED613522E7752DF00768A02 /* HomeHelper.swift in Sources */,
 				CE189EF92EBF827C0008931E /* Category.swift in Sources */,
+				CE09B0402ED1BD6300A0E9D5 /* HomeRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,16 +520,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YLA926J2Q5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YourQuickToDo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Your To-Do";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -405,9 +540,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = iosdevkundan.YourQuickToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -416,16 +556,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YLA926J2Q5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YourQuickToDo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Your To-Do";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -433,9 +576,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = iosdevkundan.YourQuickToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

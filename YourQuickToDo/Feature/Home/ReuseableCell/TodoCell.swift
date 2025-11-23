@@ -50,10 +50,13 @@ class TodoCell: UITableViewCell {
     }
     
     func configureCell(with todo: TodoTask) {
-        todo.isCompleted ? checkMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal) : checkMarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        let isDone = todo.isCompleted
+        checkMarkButton.setImage(UIImage(systemName: isDone ? "checkmark.circle.fill" : "checkmark.circle" ), for: .normal)
+        checkMarkButton.tintColor = isDone ? .systemGreen : .black 
         titleLbl.text = todo.title
         descriptonLbl.text = todo.Taskdescription
-        dateLbl.text =  DateFormatterHelper().formatDate(todo.createdAt)
+        // Show updatedAt to reflect the most recent change (edit, completion toggle, etc.)
+        dateLbl.text = DateFormatterHelper().formatDate(todo.updatedAt)
     }
     
     

@@ -22,6 +22,7 @@ protocol TaskRepositoryProtocol {
     func getCompletedTasks() -> Results<TodoTask>?
     func getPendingTasks() -> Results<TodoTask>?
     func searchTasks(query: String) -> Results<TodoTask>?
+    func getTodaysTasks() -> Results<TodoTask>?
     
     // MARK: - Bulk Operations
     func addTasks(_ tasks: [TodoTask]) -> Bool
@@ -134,6 +135,25 @@ class TaskRepository: TaskRepositoryProtocol {
             .sorted(byKeyPath: "createdAt", ascending: false)
     }
     
+    func getTodaysTasks() -> Results<TodoTask>? {
+        // Use device's current calendar which respects user's timezone
+        let calendar = Calendar.current
+        let now = Date() // Current moment in time (timezone-agnostic)
+        
+        // Get start and end of "today" in user's local timezone
+        let startOfToday = calendar.startOfDay(for: now)
+        let endOfToday = calendar.date(byAdding: .day, value: 1, to: startOfToday)!
+        
+        // Debug: Print timezone info
+        print("🌍 Timezone: \(TimeZone.current.identifier), Offset: \(TimeZone.current.secondsFromGMT() / 3600)h")
+        print("📅 Today's range: \(startOfToday) to \(endOfToday)")
+        
+        // Filter tasks created between start and end of today (in user's timezone)
+        return realm?.objects(TodoTask.self)
+            .filter("createdAt >= %@ AND createdAt < %@", startOfToday, endOfToday)
+            .sorted(byKeyPath: "createdAt", ascending: false)
+    }
+    
     // MARK: - Bulk Operations
     
     func addTasks(_ tasks: [TodoTask]) -> Bool {
@@ -212,6 +232,7 @@ class MockTaskRepository: TaskRepositoryProtocol {
     func getCompletedTasks() -> Results<TodoTask>? { return nil }
     func getPendingTasks() -> Results<TodoTask>? { return nil }
     func searchTasks(query: String) -> Results<TodoTask>? { return nil }
+    func getTodaysTasks() -> Results<TodoTask>? { return nil }
     func addTasks(_ tasks: [TodoTask]) -> Bool {
         mockTasks.append(contentsOf: tasks)
         return true

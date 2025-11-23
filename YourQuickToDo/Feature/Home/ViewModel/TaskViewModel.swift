@@ -61,14 +61,22 @@ class TaskViewModel {
         syncWithRemote()
         
     }
-    private func setupRealmObserver() {
-           allTasks = taskRepository.getAllTasks()
+    private func setupRealmObserver(todayOnly: Bool = false) {
+           allTasks = todayOnly ? taskRepository.getTodaysTasks() : taskRepository.getAllTasks()
            
            notificationToken = allTasks?.observe { [weak self] changes in
                print("👀 ViewModel: Realm collection changed")
                self?.onTasksUpdated?()
            }
        }
+    
+    func loadTodaysTasks() {
+        isLoading = true
+        // Update observer to watch only today's tasks
+        notificationToken?.invalidate()
+        setupRealmObserver(todayOnly: true)
+        isLoading = false
+    }
     
     func addTask(title: String) {
         print("➕ ViewModel: Adding task - \(title)")
@@ -82,8 +90,12 @@ class TaskViewModel {
     }
     
     func addTask(_ task: TodoTask) {
-        print("➕ ViewModel: Adding task object - \(task.title)")
+        print("➕ ViewModel: Adding task - \(task.title)")
         if taskRepository.addTask(task) {
+            // Schedule notification if task has a deadline
+            if task.deadline != nil {
+                NotificationManager.shared.scheduleMultipleNotifications(for: task)
+            }
             loadLocalTasks()
         } else {
             handleError(NSError(domain: "Database Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to add task"]))
@@ -92,6 +104,10 @@ class TaskViewModel {
     
     func deleteTask(_ task: TodoTask) {
         print("🗑️ ViewModel: Deleting task - \(task.title)")
+        
+        // Cancel any pending notifications for this task
+        NotificationManager.shared.cancelNotification(for: task.id.stringValue)
+        
         if taskRepository.deleteTask(task) {
             loadLocalTasks()
         } else {
@@ -113,15 +129,24 @@ class TaskViewModel {
     }
     
     func toggleTaskCompletion(_ task: TodoTask) {
-        print("🔘 ViewModel: Toggling task - \(task.title) to \(!task.isCompleted)")
-        if !taskRepository.toggleTaskCompletion(task) {
+        print("✅ ViewModel: Toggling completion for task - \(task.title)")
+        
+        // If completing the task, cancel notification
+        if !task.isCompleted {
+            NotificationManager.shared.cancelNotification(for: task.id.stringValue)
+        }
+        
+        if taskRepository.toggleTaskCompletion(task) {
+            // Task is automatically updated in Realm Results
+            print("✅ Task completion toggled: \(task.title) - isCompleted: \(task.isCompleted)")
+        } else {
             handleError(NSError(domain: "Database Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to update task"]))
         }
         // No need to reload - Realm Results auto-update
     }
     
     func updateTaskTitle(_ task: TodoTask, newTitle: String) {
-        print("✏️ ViewModel: Updating task title - \(task.title) → \(newTitle)")
+        print(" ViewModel: Updating task title - \(task.title) → \(newTitle)")
         let updates = ["title": newTitle]
         
         if !taskRepository.updateTask(task, updates: updates) {
@@ -141,17 +166,22 @@ class TaskViewModel {
         return taskRepository.searchTasks(query: query)
     }
     
+    func getTodaysTasks() -> Results<TodoTask>? {
+        return taskRepository.getTodaysTasks()
+    }
+
+    
     // MARK: - Private Methods
     
     private func loadLocalTasks() {
-        print("📂 ViewModel: Loading local tasks from Realm")
+        print(" ViewModel: Loading local tasks from Realm")
         allTasks = taskRepository.getAllTasks()
         
         // Debug: Print what's in Realm
         if let tasks = allTasks {
-            print("📊 ViewModel: Realm contains \(tasks.count) tasks")
+            print(" ViewModel: Realm contains \(tasks.count) tasks")
             for task in tasks.prefix(3) { // Show first 3 tasks
-                print("   📝 - '\(task.title)' | Completed: \(task.isCompleted) | Created: \(task.createdAt)")
+                print("    - '\(task.title)' | Completed: \(task.isCompleted) | Created: \(task.createdAt)")
             }
             if tasks.count > 3 {
                 print("   ... and \(tasks.count - 3) more tasks")
@@ -159,11 +189,11 @@ class TaskViewModel {
         }
         
         isLoading = false
-        print("✅ ViewModel: Local tasks loaded")
+        print(" ViewModel: Local tasks loaded")
     }
     
     private func syncWithRemote() {
-        print("🌐 ViewModel: Starting remote sync with mock service")
+        print(" ViewModel: Starting remote sync with mock service")
         apiService.getAllTask { [weak self] (result: Result<[TodoTask], Error>) in
             guard let self = self else { return }
             
@@ -173,10 +203,10 @@ class TaskViewModel {
                 
                 switch result {
                 case .success(let remoteTasks):
-                    print("✅ ViewModel: Mock service returned \(remoteTasks.count) tasks")
+                    print(" ViewModel: Mock service returned \(remoteTasks.count) tasks")
                     self.handleRemoteTasks(remoteTasks)
                 case .failure(let error):
-                    print("❌ ViewModel: Mock service error - \(error)")
+                    print(" ViewModel: Mock service error - \(error)")
                     self.handleError(error)
                 }
             }
@@ -184,7 +214,7 @@ class TaskViewModel {
     }
     
     private func handleRemoteTasks(_ remoteTasks: [TodoTask]) {
-        print("🔄 ViewModel: Processing \(remoteTasks.count) remote tasks")
+        print(" ViewModel: Processing \(remoteTasks.count) remote tasks")
         if isUsingMockData {
                print("💡 Mock mode: Skipping Realm save for remote tasks")
                return // Don't save mock data to Realm!
@@ -196,21 +226,21 @@ class TaskViewModel {
                 // Add new task from remote
                 if taskRepository.addTask(remoteTask) {
                     newTasksCount += 1
-                    print("📥 ViewModel: Added new task from remote - '\(remoteTask.title)'")
+                    print(" ViewModel: Added new task from remote - '\(remoteTask.title)'")
                 }
             } else {
-                print("ℹ️ ViewModel: Task already exists - '\(remoteTask.title)'")
+                print(" ViewModel: Task already exists - '\(remoteTask.title)'")
             }
         }
         
-        print("📥 ViewModel: Added \(newTasksCount) new tasks from remote")
+        print(" ViewModel: Added \(newTasksCount) new tasks from remote")
         
         // Refresh local data
         loadLocalTasks()
     }
     
     private func handleError(_ error: Error) {
-        print("❌ ViewModel: Error handled - \(error.localizedDescription)")
+        print(" ViewModel: Error handled - \(error.localizedDescription)")
         isError = true
         errorMessage = error.localizedDescription
         onErrorStateChanged?(true, errorMessage)
@@ -225,7 +255,7 @@ class TaskViewModel {
     // MARK: - Debug Methods
     
     func clearAllTasks() {
-        print("🧹 ViewModel: Clearing ALL tasks from Realm")
+        print(" ViewModel: Clearing ALL tasks from Realm")
         _ = taskRepository.deleteAllTasks()
         loadLocalTasks()
     }
@@ -234,7 +264,7 @@ class TaskViewModel {
 
 extension TaskViewModel {
     private func loadMockTasks() {
-        print("🎭 Loading MOCK data (not saving to Realm)")
+        print(" Loading MOCK data (not saving to Realm)")
         apiService.getAllTask { [weak self] (result: Result<[TodoTask], Error>) in
             guard let self = self else { return }
             
@@ -243,7 +273,7 @@ extension TaskViewModel {
                 
                 switch result {
                 case .success(let mockTasks):
-                    print("🎭 Mock data loaded: \(mockTasks.count) tasks")
+                    print(" Mock data loaded: \(mockTasks.count) tasks")
                     
                     // TEMPORARY: Just show mock data without saving
                     // This will display but won't persist
@@ -252,13 +282,13 @@ extension TaskViewModel {
                     
                     // For demo purposes, we'll just log the mock data
                     for task in mockTasks {
-                        print("   🎭 Mock Task: '\(task.title)' - \(task.isCompleted ? "Completed" : "Pending")")
+                        print("    Mock Task: '\(task.title)' - \(task.isCompleted ? "Completed" : "Pending")")
                     }
                     
                     print("💡 Note: Mock data is displayed in logs but NOT saved to Realm")
                     
                 case .failure(let error):
-                    print("❌ Mock service error: \(error)")
+                    print(" Mock service error: \(error)")
                     self.handleError(error)
                 }
             }

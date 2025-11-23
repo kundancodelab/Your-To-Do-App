@@ -234,11 +234,8 @@ class AddNewTaskVC: AppUtilityBaseClass {
                return
            }
            
-           guard let taskDescription = tfTaskDescription.text, !taskDescription.isEmpty else {
-               showRedView(view: tfTaskDescription)
-               showCustomAlert(title: "Error", message: "Please enter task description", viewController: self)
-               return
-           }
+           // Description is optional - use empty string if not provided
+           let taskDescription = tfTaskDescription.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
            
            if let editingTask = editingTask {
                // UPDATE existing task

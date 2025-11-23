@@ -26,6 +26,7 @@
 		CE189F032EBF83AA0008931E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F022EBF83AA0008931E /* DatabaseManager.swift */; };
 		CE189F062EBF96680008931E /* AppUtilityBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F052EBF96680008931E /* AppUtilityBaseClass.swift */; };
 		CE189F092EBFA6370008931E /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189F082EBFA6370008931E /* TaskRepository.swift */; };
+		CE29752B2ED3A07100F9CBC1 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29752A2ED3A07100F9CBC1 /* AboutVC.swift */; };
 		CE7608F42ED25C6700F0196C /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7608F32ED25C6700F0196C /* OnboardingCell.swift */; };
 		CE7608F62ED25D3300F0196C /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7608F52ED25D3300F0196C /* AppTheme.swift */; };
 		CE7608F82ED25DB400F0196C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7608F72ED25DB400F0196C /* Utils.swift */; };
@@ -79,6 +80,7 @@
 		CE189F022EBF83AA0008931E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		CE189F052EBF96680008931E /* AppUtilityBaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtilityBaseClass.swift; sourceTree = "<group>"; };
 		CE189F082EBFA6370008931E /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		CE29752A2ED3A07100F9CBC1 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		CE7608F32ED25C6700F0196C /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		CE7608F52ED25D3300F0196C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		CE7608F72ED25DB400F0196C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				CE09B0362ED1BC2C00A0E9D5 /* Router */,
+				CE29752A2ED3A07100F9CBC1 /* AboutVC.swift */,
 				CE09B0372ED1BC2C00A0E9D5 /* ProfileVC.swift */,
 			);
 			path = Profile;
@@ -474,6 +477,7 @@
 				CE09B0442ED1BE8900A0E9D5 /* AppDelegate+Notifications.swift in Sources */,
 				CEF5C9082E7735AC007409A2 /* TodoCell.swift in Sources */,
 				CE09B0312ED1BB8600A0E9D5 /* Router.swift in Sources */,
+				CE29752B2ED3A07100F9CBC1 /* AboutVC.swift in Sources */,
 				CE189F092EBFA6370008931E /* TaskRepository.swift in Sources */,
 				CE7608F82ED25DB400F0196C /* Utils.swift in Sources */,
 				CED6134F2E77504A00768A02 /* TaskViewModel.swift in Sources */,

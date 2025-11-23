@@ -54,9 +54,24 @@ class TodoCell: UITableViewCell {
         checkMarkButton.setImage(UIImage(systemName: isDone ? "checkmark.circle.fill" : "checkmark.circle" ), for: .normal)
         checkMarkButton.tintColor = isDone ? .systemGreen : .black 
         titleLbl.text = todo.title
-        descriptonLbl.text = todo.Taskdescription
-        // Show updatedAt to reflect the most recent change (edit, completion toggle, etc.)
-        dateLbl.text = DateFormatterHelper().formatDate(todo.updatedAt)
+        
+        // Show description only if it's not empty
+        if !todo.Taskdescription.isEmpty {
+            descriptonLbl.isHidden = false
+            descriptonLbl.text = todo.Taskdescription
+        } else {
+            descriptonLbl.isHidden = true
+            descriptonLbl.text = nil
+        }
+        
+        // Show deadline if present, otherwise hide the date label
+        if let deadline = todo.deadline {
+            dateLbl.isHidden = false
+            dateLbl.text = "\(DateFormatterHelper().formatDate(deadline))"
+        } else {
+            dateLbl.isHidden = true
+            dateLbl.text = nil
+        }
     }
     
     

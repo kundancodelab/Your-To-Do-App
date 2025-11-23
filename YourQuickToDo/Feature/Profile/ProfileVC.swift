@@ -42,12 +42,12 @@ class ProfileVC: AppUtilityBaseClass {
     
     private enum NotificationRow: Int, CaseIterable {
         case enable
-        case settings
+       
         
         var title: String {
             switch self {
             case .enable: return "Enable Notifications"
-            case .settings: return "Notification Settings"
+           
             }
         }
     }
@@ -203,8 +203,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryView = switchControl
             cell.selectionStyle = .none
             
-        case .settings:
-            cell.accessoryType = .disclosureIndicator
+       
         }
     }
     
@@ -236,9 +235,10 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
         
         switch sectionType {
         case .notifications:
-            if let row = NotificationRow(rawValue: indexPath.row), row == .settings {
-                router?.navigate(to: .notificationSettings)
-            }
+//            if let row = NotificationRow(rawValue: indexPath.row), row == .settings {
+//                router?.navigate(to: .notificationSettings)
+//            }
+            print("Notifications got clicked.")
         case .data:
             if let row = DataRow(rawValue: indexPath.row), row == .clearAll {
                 handleClearAllTasks()

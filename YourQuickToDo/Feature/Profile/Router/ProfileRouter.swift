@@ -76,20 +76,7 @@ enum ProfileFlow: NavigationDestination {
     }
     
     private func createAboutViewController() -> UIViewController {
-        // TODO: Create dedicated AboutVC
-        let vc = UIViewController()
-        vc.view.backgroundColor = .systemBackground
-        let label = UILabel()
-        label.text = "About YourQuickToDo\nVersion 1.0.0"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        vc.view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor)
-        ])
-        return vc
+        return AboutVC()
     }
 }
 

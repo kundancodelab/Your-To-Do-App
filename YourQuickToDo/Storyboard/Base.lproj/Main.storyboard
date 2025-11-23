@@ -383,11 +383,11 @@
             </objects>
             <point key="canvasLocation" x="1324" y="-334"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Support-->
         <scene sceneID="QpK-EW-MwY">
             <objects>
                 <navigationController id="FTd-4m-ga7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Buy_My_Coffee-icon" id="PkM-NQ-aLy"/>
+                    <tabBarItem key="tabBarItem" title="Support" image="Coffee-icon" id="PkM-NQ-aLy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ikb-sa-CFe">
                         <rect key="frame" x="0.0" y="20" width="320" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -423,25 +423,10 @@
                     <view key="view" contentMode="scaleToFill" id="kQb-sz-MCq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F5m-VZ-go2">
-                                <rect key="frame" x="16" y="74" width="288" height="411"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="9UP-pY-W8F"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="F5m-VZ-go2" firstAttribute="top" secondItem="9UP-pY-W8F" secondAttribute="top" id="24t-OB-kPT"/>
-                            <constraint firstItem="9UP-pY-W8F" firstAttribute="bottom" secondItem="F5m-VZ-go2" secondAttribute="bottom" id="8Tm-zd-bgO"/>
-                            <constraint firstItem="F5m-VZ-go2" firstAttribute="leading" secondItem="9UP-pY-W8F" secondAttribute="leading" constant="16" id="YDc-7C-bGB"/>
-                            <constraint firstItem="9UP-pY-W8F" firstAttribute="trailing" secondItem="F5m-VZ-go2" secondAttribute="trailing" constant="16" id="epL-zY-XYw"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qgv-0m-WSq"/>
-                    <connections>
-                        <outlet property="webView" destination="F5m-VZ-go2" id="R0i-ET-1zU"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDw-oJ-uQI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -449,7 +434,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Buy_My_Coffee-icon" width="50" height="50"/>
+        <image name="Coffee-icon" width="36" height="36"/>
         <image name="chevron.down.circle.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>

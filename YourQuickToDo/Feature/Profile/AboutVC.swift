@@ -100,7 +100,17 @@ class AboutVC: AppUtilityBaseClass {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    /// router 
+    private let router: ProfileRouter
+    // Dependecies Injector DI
+    init(router: ProfileRouter) {
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

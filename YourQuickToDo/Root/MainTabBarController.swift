@@ -17,8 +17,10 @@ class MainTabBarController: UITabBarController {
         
         // Configure Tab Bar Appearance
         tabBar.tintColor = AppTheme.Colors.primary
-        tabBar.unselectedItemTintColor = AppTheme.Colors.textSecondary
-        tabBar.backgroundColor = AppTheme.Colors.cardBackground
+      //  tabBar.unselectedItemTintColor = AppTheme.Colors.textSecondary
+      //  tabBar.backgroundColor = AppTheme.Colors.cardBackground
+        
+       
     }
     
     

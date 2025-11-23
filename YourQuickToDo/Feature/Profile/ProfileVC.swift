@@ -23,7 +23,7 @@ class ProfileVC: AppUtilityBaseClass {
     
     // MARK: - Properties
     
-    var router: ProfileRouter?
+    private var router = RouterManager.profileRouter
     private let taskViewModel = TaskViewModel()
     
     private enum Section: Int, CaseIterable {
@@ -78,7 +78,9 @@ class ProfileVC: AppUtilityBaseClass {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        RouterManager.profileRouter.setNavigationController(self.navigationController!)
         setupUI()
+        //setupRouter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +89,15 @@ class ProfileVC: AppUtilityBaseClass {
     }
     
     // MARK: - Setup
+    
+    private func setupRouter() {
+        // Initialize router with navigation controller
+        // This is similar to how @StateObject works in SwiftUI
+        if router == nil, let navController = navigationController {
+            router = ProfileRouter(navigationController: navController)
+            print("✅ ProfileVC: Router initialized with navigation controller")
+        }
+    }
     
     private func setupUI() {
         title = "Profile"
@@ -245,7 +256,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             }
         case .about:
             if let row = AboutRow(rawValue: indexPath.row), row == .about {
-                router?.navigate(to: .about)
+                router.navigate(to: .about)  // Use Router pattern!
             }
         }
     }

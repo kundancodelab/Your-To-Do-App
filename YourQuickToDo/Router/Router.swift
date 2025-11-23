@@ -20,6 +20,12 @@ protocol NavigationDestination {
     func createViewController() -> UIViewController
 }
 
+
+enum RouterManager {
+    static let profileRouter = Router<ProfileFlow>()
+}
+
+
 // MARK: - Generic Router Class
 
 /// Generic Router class for type-safe navigation
@@ -48,7 +54,7 @@ class Router<Destination: NavigationDestination> {
     ///   - animated: Whether to animate the transition (default: true)
     func navigate(to destination: Destination, animated: Bool = true) {
         guard let navigationController = navigationController else {
-            print("⚠️ Router: Navigation controller is nil")
+            print(" Router: Navigation controller is nil")
             return
         }
         
@@ -65,12 +71,12 @@ class Router<Destination: NavigationDestination> {
     /// - Parameter animated: Whether to animate the transition (default: true)
     func navigateBack(animated: Bool = true) {
         guard let navigationController = navigationController else {
-            print("⚠️ Router: Navigation controller is nil")
+            print(" Router: Navigation controller is nil")
             return
         }
         
         guard !navPaths.isEmpty else {
-            print("⚠️ Router: Navigation stack is empty")
+            print(" Router: Navigation stack is empty")
             return
         }
         

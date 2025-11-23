@@ -29,6 +29,8 @@ enum ProfileFlow: NavigationDestination {
     }
     
     func createViewController() -> UIViewController {
+        // Get the router from the ProfileRouter singleton/shared instance
+        // Each factory method handles its own dependencies
         switch self {
         case .settings:
             return createSettingsViewController()
@@ -76,7 +78,7 @@ enum ProfileFlow: NavigationDestination {
     }
     
     private func createAboutViewController() -> UIViewController {
-        return AboutVC()
+        return AboutVC(router: RouterManager.profileRouter)
     }
 }
 

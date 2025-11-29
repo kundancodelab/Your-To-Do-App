@@ -16,29 +16,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chart.line.text.clipboard" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yMx-LA-6s6">
-                                <rect key="frame" x="46.666666666666657" y="188.66666666666663" width="300" height="303"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TASKVORA" translatesAutoresizingMaskIntoConstraints="NO" id="yMx-LA-6s6">
+                                <rect key="frame" x="12" y="188.66666666666663" width="369" height="400"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="b5x-fO-YCx"/>
-                                    <constraint firstAttribute="height" constant="300" id="hcm-oZ-1QY"/>
+                                    <constraint firstAttribute="height" constant="400" id="ohu-kx-ZZz"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your To do App " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WO2-xk-zEt">
-                                <rect key="frame" x="81.666666666666671" y="526.66666666666663" width="229.66666666666663" height="37"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="31"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WO2-xk-zEt" firstAttribute="top" secondItem="yMx-LA-6s6" secondAttribute="bottom" constant="36" id="K69-Mz-9jF"/>
-                            <constraint firstItem="yMx-LA-6s6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dUk-eY-Mrg"/>
-                            <constraint firstItem="yMx-LA-6s6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.8" id="hFo-Yt-aku"/>
-                            <constraint firstItem="WO2-xk-zEt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hwk-UR-Efj"/>
+                            <constraint firstAttribute="trailing" secondItem="yMx-LA-6s6" secondAttribute="trailing" constant="12" id="0rs-l3-IJG"/>
+                            <constraint firstItem="yMx-LA-6s6" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="12" id="V4z-zv-jfS"/>
+                            <constraint firstItem="yMx-LA-6s6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" multiplier="1.6" id="xi6-Lu-3uo"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -48,7 +40,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chart.line.text.clipboard" catalog="system" width="103" height="128"/>
+        <image name="TASKVORA" width="1024" height="1024"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

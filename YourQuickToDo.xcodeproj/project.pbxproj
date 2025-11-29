@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE06AF5F2EDBB76100E06ACC /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE06AF5E2EDBB76100E06ACC /* IQKeyboardManagerSwift */; };
 		CE09B0312ED1BB8600A0E9D5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B02F2ED1BB8600A0E9D5 /* Router.swift */; };
 		CE09B0342ED1BC0800A0E9D5 /* AllTasksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0322ED1BC0800A0E9D5 /* AllTasksVC.swift */; };
 		CE09B0392ED1BC2C00A0E9D5 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09B0372ED1BC2C00A0E9D5 /* ProfileVC.swift */; };
@@ -110,6 +111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE189EFE2EBF833F0008931E /* RealmSwift in Frameworks */,
+				CE06AF5F2EDBB76100E06ACC /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +398,7 @@
 			name = YourQuickToDo;
 			packageProductDependencies = (
 				CE189EFD2EBF833F0008931E /* RealmSwift */,
+				CE06AF5E2EDBB76100E06ACC /* IQKeyboardManagerSwift */,
 			);
 			productName = YourQuickToDo;
 			productReference = CEBD27CE2E7600AF00D4F8DD /* YourQuickToDo.app */;
@@ -427,6 +430,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				CE189EF42EBF81470008931E /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CE06AF5D2EDBB76100E06ACC /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CEBD27CF2E7600AF00D4F8DD /* Products */;
@@ -734,6 +738,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE06AF5D2EDBB76100E06ACC /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
 		CE189EF42EBF81470008931E /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -745,6 +757,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE06AF5E2EDBB76100E06ACC /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE06AF5D2EDBB76100E06ACC /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		CE189EFD2EBF833F0008931E /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE189EF42EBF81470008931E /* XCRemoteSwiftPackageReference "realm-swift" */;

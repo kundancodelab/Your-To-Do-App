@@ -5,6 +5,7 @@
 //  Created by User on 22/11/25.
 //
 
+/*
 import UIKit
 import WebKit
 
@@ -152,3 +153,4 @@ extension BuyMyCoffeeWebViewVC: WKNavigationDelegate {
         showError(message: "Failed to load page. Please check your internet connection.")
     }
 }
+*/

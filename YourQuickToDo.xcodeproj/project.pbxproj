@@ -524,9 +524,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YLA926J2Q5;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YourQuickToDo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Your To-Do";
+				INFOPLIST_KEY_CFBundleDisplayName = TaskVora;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -541,6 +544,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = iosdevkundan.YourQuickToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -562,7 +566,7 @@
 				DEVELOPMENT_TEAM = YLA926J2Q5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YourQuickToDo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Your To-Do";
+				INFOPLIST_KEY_CFBundleDisplayName = TaskVora;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

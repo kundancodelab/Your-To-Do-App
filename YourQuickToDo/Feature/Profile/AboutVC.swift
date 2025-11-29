@@ -188,6 +188,7 @@ class AboutVC: AppUtilityBaseClass {
     // MARK: - Actions
     
     @objc private func didTapSupportButton() {
+        /*
         // Haptic feedback
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
@@ -204,5 +205,6 @@ class AboutVC: AppUtilityBaseClass {
         }
         
         present(navController, animated: true)
+         */
     }
 }

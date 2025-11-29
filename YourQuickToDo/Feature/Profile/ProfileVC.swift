@@ -25,6 +25,7 @@ class ProfileVC: AppUtilityBaseClass {
     
     private var router = RouterManager.profileRouter
     private let taskViewModel = TaskViewModel()
+    private var notificationSwitch: UISwitch?
     
     private enum Section: Int, CaseIterable {
         case notifications
@@ -80,12 +81,45 @@ class ProfileVC: AppUtilityBaseClass {
         super.viewDidLoad()
         RouterManager.profileRouter.setNavigationController(self.navigationController!)
         setupUI()
+        setupNotificationObserver()
         //setupRouter()
+    }
+    
+    deinit {
+        // Remove observer when view controller is deallocated
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        refreshNotificationSwitch()
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func setupNotificationObserver() {
+        // Observe when app becomes active (e.g., returning from Settings)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func appDidBecomeActive() {
+        // Refresh notification switch when app becomes active
+        refreshNotificationSwitch()
+    }
+    
+    private func refreshNotificationSwitch() {
+        // Sync switch with actual system notification permission status
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                self.notificationSwitch?.isOn = settings.authorizationStatus == .authorized
+            }
+        }
     }
     
     // MARK: - Setup
@@ -117,19 +151,72 @@ class ProfileVC: AppUtilityBaseClass {
     
     private func handleNotificationToggle(_ isOn: Bool, completion: @escaping (Bool) -> Void) {
         if isOn {
+            // User wants to enable notifications
             NotificationManager.shared.requestPermission { granted in
                 DispatchQueue.main.async {
                     if granted {
-                        self.showToast(message: "Notifications enabled", duration: 2.0, color: AppTheme.Colors.secondary.withAlphaComponent(0.8), isTop: false)
+                        // Notifications enabled successfully
+                        self.showAlert(
+                            title: "Notifications Enabled ✅",
+                            message: "You will receive reminders for your tasks with upcoming deadlines."
+                        )
+                        completion(true)
                     } else {
-                        self.showCustomAlert(title: "Permission Denied", message: "Please enable notifications in Settings", viewController: self)
+                        // Permission denied - show alert with option to open Settings
+                        self.showSettingsAlert(
+                            title: "Permission Denied",
+                            message: "Please enable notifications in Settings to receive task reminders."
+                        )
+                        completion(false)
                     }
-                    completion(granted)
                 }
             }
         } else {
+            // User wants to disable notifications
+            // Show alert with option to open Settings
+            self.showSettingsAlert(
+                title: "Disable Notifications",
+                message: "To disable notifications, you need to go to Settings."
+            )
+            // Force the switch back to ON since we can't actually disable system permissions
             completion(true)
         }
+    }
+    
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+    }
+    
+    private func showSettingsAlert(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let settingsAction = UIAlertAction(title: "Open Settings", style: .default) { _ in
+            // Open app settings
+            if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsUrl)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(settingsAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
     }
     
     private func handleClearAllTasks() {
@@ -204,7 +291,10 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             let switchControl = UISwitch()
             switchControl.addTarget(self, action: #selector(notificationSwitchChanged(_:)), for: .valueChanged)
             
-            // Check current notification status
+            // Store reference to the switch
+            self.notificationSwitch = switchControl
+            
+            // Sync switch with actual system notification permission status
             UNUserNotificationCenter.current().getNotificationSettings { settings in
                 DispatchQueue.main.async {
                     switchControl.isOn = settings.authorizationStatus == .authorized
@@ -213,8 +303,6 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
             
             cell.accessoryView = switchControl
             cell.selectionStyle = .none
-            
-       
         }
     }
     

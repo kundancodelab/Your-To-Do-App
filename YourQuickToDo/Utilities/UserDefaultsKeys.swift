@@ -13,9 +13,7 @@ struct UserDefaultsKeys {
     static let isOnboardingCompleted = "isOnboardingCompleted"
     
     // MARK: - App Settings
-    // Add more keys here as needed, e.g.:
-    // static let isDarkModeEnabled = "isDarkModeEnabled"
-    // static let notificationsEnabled = "notificationsEnabled"
+    static let notificationsEnabled = "notificationsEnabled"
     
     // MARK: - User Preferences
     // static let preferredTaskSortOrder = "preferredTaskSortOrder"
@@ -30,6 +28,15 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: UserDefaultsKeys.isOnboardingCompleted)
+        }
+    }
+    
+    var notificationsEnabled: Bool {
+        get {
+            return bool(forKey: UserDefaultsKeys.notificationsEnabled)
+        }
+        set {
+            set(newValue, forKey: UserDefaultsKeys.notificationsEnabled)
         }
     }
 }
